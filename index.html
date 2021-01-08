@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="Herbert Braun">
+		<meta name="viewport" content="initial-scale=1">
+		<title>Test Page Custom Elements</title>
+		<style>
+			body {
+				color: #000;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+			}
+		</style>
+		<script type="module">
+			import ctHeader from './components/ct-header.js';
+			customElements.define('ct-header', ctHeader);
+		</script>
+	</head>
+	<body>
+		<ct-header data-headline="Headline" data-subline="Subline"></ct-header>
+		<p>Element <code>ct-header</code> mit Unterzeile</p>
+
+		<div class="wrapper"></div>
+		<script>
+			const wrapper = document.querySelector('.wrapper');
+			fetch('components/classy-p.html')
+			.then(resp => resp.text())
+			.then(content => {
+				wrapper.innerHTML = content;
+			});
+		</script>
+	</body>
+</html>

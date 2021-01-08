@@ -1,0 +1,29 @@
+.classy {
+	display: inline-block;
+	padding: 1em 2em;
+	font-size: 3em;
+	font-family: "Comic Sans MS", script;
+	font-weight: bold;
+	text-align: center;
+	border-radius: .5em;
+	box-shadow: .2em .2em 20px #777;
+	background-image: radial-gradient(rgba(255,255,0,.1) 20%, rgba(255,0,255,1) 100%);
+	color: darkblue;
+	transition: transform .5s;
+}
+
+.classy:hover {
+	transform: rotate(180deg);
+}
+
+.is-link {
+	cursor: pointer;
+}
+
+.is-yellow {
+	background-image: radial-gradient(rgba(255,255,0,.1) 20%, rgba(255,255,0,1) 100%);
+}
+
+.is-green {
+	background-image: radial-gradient(rgba(255,255,0,.1) 20%, rgba(0,255,0,1) 100%);
+}
