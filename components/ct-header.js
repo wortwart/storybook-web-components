@@ -1,11 +1,38 @@
+/*
+	Webkomponente mit besserem Styling und performanten DOM-Methoden
+	Änderungen der Attribute aktualisieren das Shadow DOM
+*/
+
 export default class extends HTMLElement {
+	static get observedAttributes() {
+		return ['subline', 'inverse'];
+	}
+
 	constructor() {
 		super();
-		const color = this.dataset.inverse? '#ccc' : '#333';
+		this.header = document.createElement('header');
+	}
+
+	connectedCallback() {
+		this.createInnerDom();
+		const shadowRoot = this.attachShadow({mode: 'closed'});
+		shadowRoot.appendChild(this.header);
+	}
+
+	attributeChangedCallback() {
+		this.createInnerDom();
+	}
+
+	createInnerDom() {
+		while (this.header.firstChild)
+			this.header.removeChild(this.header.firstChild);
+		const inverse = this.getAttribute('inverse');
+		const subline = this.getAttribute('subline');
+		const color = typeof inverse === 'string'? '#ccc' : '#333';
 		const distance = .5;
-		const header = document.createElement('header');
 		const style = document.createElement('style');
 		style.textContent = `
+			:host {display: block;}
 			h1 {
 				padding-bottom: 0;
 				margin-bottom: 0;
@@ -20,16 +47,15 @@ export default class extends HTMLElement {
 				color: ${color};
 			}
 		`;
-		header.appendChild(style);
+		this.header.appendChild(style);
 		const h1 = document.createElement('h1');
-		h1.textContent = this.dataset.headline;
-		header.appendChild(h1);
-		if (this.dataset.subline) {
+		const slot = document.createElement('slot');
+		h1.appendChild(slot);
+		this.header.appendChild(h1);
+		if (subline) {
 			const h2 = document.createElement('h2');
-			h2.textContent = this.dataset.subline;
-			header.appendChild(h2);
+			h2.textContent = subline;
+			this.header.appendChild(h2);
 		}
-		const shadowRoot = this.attachShadow({mode: 'closed'});
-		shadowRoot.appendChild(header);
 	}
 };

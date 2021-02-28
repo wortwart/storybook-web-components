@@ -13,12 +13,17 @@
 		</style>
 		<script type="module">
 			import ctHeader from './components/ct-header.js';
+			//import ctHeader from './components/ct-header_simple.js';
 			customElements.define('ct-header', ctHeader);
 		</script>
 	</head>
 	<body>
-		<ct-header data-headline="Headline" data-subline="Subline"></ct-header>
+		<ct-header>Webkomponente</ct-header>
+		<p>Element <code>ct-header</code> ohne Attribute</p>
+		<ct-header subline="&hellip; mit Unterzeile">Webkomponente</ct-header>
 		<p>Element <code>ct-header</code> mit Unterzeile</p>
+		<ct-header subline="&hellip; mit Unterzeile" inverse>Variante <q>inverse</q></ct-header>
+		<p>Element <code>ct-header</code> mit Unterzeile und invertierter Gestaltungsvariante</p>
 
 		<div class="wrapper"></div>
 		<script>
